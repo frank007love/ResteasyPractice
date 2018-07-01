@@ -1,0 +1,65 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+}
+
+project.ext {
+	//JACKSON_VERSION = "2.6.3"
+	JACKSON_VERSION = "2.9.4"
+    JACKSON_CORE_DEPENDENCY = "com.fasterxml.jackson.core:jackson-core:$JACKSON_VERSION"
+    JACKSON_DATABIND_DEPENDENCY = "com.fasterxml.jackson.core:jackson-databind:$JACKSON_VERSION"
+    JACKSON_ANNOTATIONS_DEPENDENCY = "com.fasterxml.jackson.core:jackson-annotations:$JACKSON_VERSION"
+    JACKSON_PROVIDER_DEPENDENCY = "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$JACKSON_VERSION"
+    JACKSON_JSR310_DEPENDENCY = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$JACKSON_VERSION"
+    
+    // 3.0.17 + will be failed
+   	RESTEASY_VERSION = '3.0.14.Final'
+    //RESTEASY_VERSION = '3.0.17.Final'
+    //RESTEASY_VERSION = '3.0.24.Final'
+    //RESTEASY_VERSION = '3.5.1.Final'
+    //RESTEASY_VERSION = '3.1.4.Final'
+    RESTEASY_CLIENT_DEPENDENCY = "org.jboss.resteasy:resteasy-client:$RESTEASY_VERSION"
+    RESTEASY_JACKSON2_PROVIDER = "org.jboss.resteasy:resteasy-jackson2-provider:$RESTEASY_VERSION"
+    RESTEASY_JAXRS_DEPENDENCY = "org.jboss.resteasy:resteasy-jaxrs:$RESTEASY_VERSION"
+    RESTEASY_MULTIPART_DEPENDENCY="org.jboss.resteasy:resteasy-multipart-provider:$RESTEASY_VERSION"
+    
+    // o
+    HTTPCLIENT_VERSION='4.5.5'
+    // o
+    HTTPCLIENT_VERSION='4.5.3'
+    // x
+    //HTTPCLIENT_VERSION='4.5.2'
+    // x
+    //HTTPCLIENT_VERSION='4.4.1'
+    // x
+    // HTTPCLIENT_VERSION='4.3.6' 
+    HTTPCLIENT_DEPENDENCY = "org.apache.httpcomponents:httpclient:$HTTPCLIENT_VERSION"
+    // ok
+    HTTPCLIENT_CORE_VERSION='4.3.3'
+    HTTPCLIENT_CORE_DEPENDENCY = "org.apache.httpcomponents:httpcore:$HTTPCLIENT_CORE_VERSION"
+ }
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile "$RESTEASY_CLIENT_DEPENDENCY"
+    compile "$RESTEASY_JACKSON2_PROVIDER"
+    compile "$RESTEASY_MULTIPART_DEPENDENCY"
+    compile "$JACKSON_ANNOTATIONS_DEPENDENCY"
+    compile "$JACKSON_JSR310_DEPENDENCY"
+    compile "$JACKSON_CORE_DEPENDENCY"
+    compile "$JACKSON_DATABIND_DEPENDENCY"
+    compile "$JACKSON_PROVIDER_DEPENDENCY"
+    compile "$HTTPCLIENT_DEPENDENCY"
+    compile "$HTTPCLIENT_CORE_DEPENDENCY"
+
+    // Declare the dependency for your favourite test framework you want to use in your tests.
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+    testCompile 'junit:junit:4.12'
+}
